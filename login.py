@@ -1,6 +1,9 @@
+from os import system
 from database import database
 
 def login():
+    system("cls")
+    print("Login Page")
     uname=input("Enter Your Username: ")
     passw=input("Enter your password: ")
     user=database.getAUser(uname,passw)

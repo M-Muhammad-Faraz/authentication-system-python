@@ -1,6 +1,8 @@
 import random as rm
 import tabulate
+from os import system
 
+choice = {"choice1":1,"choice2":2}
 class user:
     def __init__(self,username,password,info):
         self.id = rm.randint(1,100000000000)
@@ -9,8 +11,14 @@ class user:
         self.info=info
 
     def main_menu(self):
+        system("cls")
         print("Welcome " + self.username);
-        
+        ch = int(input("What would You Like to do!\nPress 1:View Your Medical Record\nPress 2: Logout"))
+        if ch == choice["choice1"]:
+            self.display()
+        else:
+            return
+    
     def display(self):
         table = [
             ["Blood-group",self.info["bloodGroup"]],
@@ -21,7 +29,8 @@ class user:
             ["Heart-Attack","Positive" if self.info["heartAttack"] else "Negitive"],
         ]
         print(tabulate.tabulate(table));
-        input()
+        input("Press any key to go back...\n")
+        self.main_menu()
     
     
      
