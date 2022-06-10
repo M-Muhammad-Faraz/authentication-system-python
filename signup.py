@@ -1,5 +1,6 @@
 from os import system
 import re
+from console_colors import bcolors
 from user import user
 from database import database;
 
@@ -12,6 +13,7 @@ def verifyInput(inp):
     return False
 
 def signup():
+    OPTION = {"option1":"1","option2":"2"}
     system("cls")
     print("SIGNUP PAGE\n")
     username=input("Enter Username: ")
@@ -32,7 +34,7 @@ def signup():
         input_now_verified=True
         heart_attack = True if (answer=='p' or answer=='P') else False
       else:
-        print("Wrong Input Try Again\n")
+        print(f"{bcolors.WARNING}Wrong Input Try Again{bcolors.ENDC}\n")
     
     input_now_verified = False
     while not input_now_verified:
@@ -41,7 +43,7 @@ def signup():
         input_now_verified=True
         tumor = True if (answer=='p' or answer=='P') else False
       else:
-        print("Wrong Input Try Again\n")
+        print(f"{bcolors.WARNING}Wrong Input Try Again{bcolors.ENDC}\n")
 
     input_now_verified = False
     while not input_now_verified:
@@ -50,7 +52,7 @@ def signup():
         input_now_verified=True
         cancer = True if (answer=='p' or answer=='P') else False
       else:
-        print("Wrong Input Try Again\n")
+        print(f"{bcolors.WARNING}Wrong Input Try Again{bcolors.ENDC}\n")
 
     input_now_verified = False
     while not input_now_verified:
@@ -59,7 +61,7 @@ def signup():
         input_now_verified=True
         covid = True if (answer=='p' or answer=='P') else False
       else:
-        print("Wrong Input Try Again\n")
+        print(f"{bcolors.WARNING}Wrong Input Try Again{bcolors.ENDC}\n")
 
 
     input_now_verified = False
@@ -69,7 +71,7 @@ def signup():
         input_now_verified=True
         tb = True if (answer=='p' or answer=='P') else False
       else:
-        print("Wrong Input Try Again\n")
+        print(f"{bcolors.WARNING}Wrong Input Try Again{bcolors.ENDC}\n")
     
 
     input_now_verified = False
@@ -80,12 +82,18 @@ def signup():
       if re.match("(A|B|AB|O)[+-]",bloodgroup):
         input_now_verified=True
       else:
-        input("Incorrect Bloodgroup, Please try again...\n")
+        input(f"{bcolors.WARNING}Incorrect Bloodgroup, Please try again...{bcolors.ENDC}\n")
 
     newUser= user(username,password,{"heartAttack":heart_attack,"tumor":tumor,"cancer":cancer,"covid":covid,"tb":tb,"bloodGroup":bloodgroup})
-    database.addANewUser(newUser)
-    
-    input("Account Created!\nPress any key to continue..")
+    status=database.addANewUser(newUser)
+    if status["code"] == "400":
+      choice = input(f"{bcolors.FAIL}Error! Username Already Taken!{bcolors.ENDC}\nPress 1: Try again!\nPress 2: Go Back\n")
+      if choice == OPTION["option1"]:
+        signup()
+      else:
+        return
+    else:
+      input(f"{bcolors.OKGREEN}Account Created!{bcolors.ENDC}\nPress any key to continue..")
 
 
 

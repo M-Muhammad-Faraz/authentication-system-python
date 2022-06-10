@@ -17,7 +17,7 @@ class user:
     def main_menu(self):
         system("cls")
         print("Welcome " + self.username);
-        ch = int(input("What would You Like to do!\nPress 1:View Your Medical Record\nPress 2: Logout"))
+        ch = int(input("What would You Like to do!\nPress 1: View Your Medical Record\nPress 2: Logout\n"))
         if ch == choice["choice1"]:
             self.display()
         else:

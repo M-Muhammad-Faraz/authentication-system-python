@@ -1,4 +1,6 @@
 from os import system
+from turtle import bgcolor
+from console_colors import bcolors
 from database import database
 
 def login():
@@ -13,7 +15,9 @@ def login():
         return currentUser
     
     else:
-        input(user["error"]+"\nPress Any Key to Continue")
+        err = user["error"]
+        input(f"{bcolors.FAIL}{err}{bcolors.ENDC}\nPress Any Key to Continue")
+        
                 
     
     return -1

@@ -9,17 +9,23 @@ class databaseModel:
             newUser = user(obj["username"],obj["password"],obj["info"],obj["encryption_pass"])
             self.users.append(newUser)
         f.close()
-
         self.currentUser=-1
+
+
     def addANewUser(self,user):
-        data=user.dumpInfo()
-        f = open("users.txt", "a",encoding="utf-8")
-        encrpyted_text = encrption(str(data))
-        f.write(encrpyted_text+"\n")
-        
-        f.close()
-        self.users.append(user)
-        return user
+        status = self.getAUser(user.username,"")
+        if status["code"]=="400":
+            return {"code":"400","error":"Username Taken"}
+        else:
+            data=user.dumpInfo()
+            f = open("users.txt", "a",encoding="utf-8")
+            encrpyted_text = encrption(str(data))
+            f.write(encrpyted_text+"\n")
+            f.close()
+            self.users.append(user)
+            return {"code":"200","user":user }
+
+    
     def getAUser(self,username,password):
         for user in self.users:
             if user.username==username:
