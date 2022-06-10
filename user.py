@@ -4,11 +4,15 @@ from os import system
 
 choice = {"choice1":1,"choice2":2}
 class user:
-    def __init__(self,username,password,info):
+    def __init__(self,username,password,info,id=13):
         self.id = rm.randint(1,100000000000)
         self.username=username
         self.password=password
         self.info=info
+        self.encryption_pass=id
+
+    def dumpInfo(self):
+        return {"username":self.username,"password":self.password,"info":self.info,"encryption_pass":self.id ,}
 
     def main_menu(self):
         system("cls")

@@ -12,7 +12,6 @@ def signup():
     while not passwordNowVerified:
         password=input("Enter Password: ")
         confirmPassword=input("Enter Password again: ")
-
         if password==confirmPassword:
           passwordNowVerified=True
         else:
@@ -38,8 +37,9 @@ def signup():
 
     newUser= user(username,password,{"heartAttack":heart_attack,"tumor":tumor,"cancer":cancer,"covid":covid,"tb":tb,"bloodGroup":bloodgroup})
     database.addANewUser(newUser)
-
+    
     input("Account Created!\nPress any key to continue..")
+
 
 
 

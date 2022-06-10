@@ -13,7 +13,8 @@ def login():
         return currentUser
     
     else:
-        print(user["error"])        
+        input(user["error"]+"\nPress Any Key to Continue")
+                
     
     return -1
     
