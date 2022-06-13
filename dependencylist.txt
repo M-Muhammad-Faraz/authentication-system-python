@@ -1,0 +1,2 @@
+pip install pwinput
+pip install tabulate

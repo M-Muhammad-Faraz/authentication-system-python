@@ -1,13 +1,13 @@
 from os import system
-from turtle import bgcolor
 from console_colors import bcolors
 from database import database
-
+import pwinput
 def login():
     system("cls")
     print("Login Page")
-    uname=input("Enter Your Username: ")
-    passw=input("Enter your password: ")
+    uname=input("Enter Username: ")
+    print("Enter ",end="")
+    passw=pwinput.pwinput()
     user=database.getAUser(uname,passw)
 
     if user["code"]=="200":
@@ -17,6 +17,7 @@ def login():
     else:
         err = user["error"]
         input(f"{bcolors.FAIL}{err}{bcolors.ENDC}\nPress Any Key to Continue")
+        login()
         
                 
     

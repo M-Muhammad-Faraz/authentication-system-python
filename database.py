@@ -13,7 +13,7 @@ class databaseModel:
 
 
     def addANewUser(self,user):
-        status = self.getAUser(user.username,"")
+        status = self.checkforExistingUser(user.username)
         if status["code"]=="400":
             return {"code":"400","error":"Username Taken"}
         else:
@@ -24,6 +24,13 @@ class databaseModel:
             f.close()
             self.users.append(user)
             return {"code":"200","user":user }
+
+    def checkforExistingUser(self,username):
+        for user in self.users:
+            if user.username==username:
+                return {"code":"400"}
+        
+        return {"code":"200"}
 
     
     def getAUser(self,username,password):

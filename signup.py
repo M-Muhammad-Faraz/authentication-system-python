@@ -1,9 +1,11 @@
 from os import system
 import re
-from console_colors import bcolors
-from user import user
-from database import database;
 
+from database import database;
+from user import user
+from console_colors import bcolors
+
+import pwinput
 
 
 def verifyInput(inp):
@@ -16,16 +18,32 @@ def signup():
     OPTION = {"option1":"1","option2":"2"}
     system("cls")
     print("SIGNUP PAGE\n")
-    username=input("Enter Username: ")
+    userNameNowVerified = False
+    while not userNameNowVerified:
+      username=input("Enter Username: ")
+      if len(username)<3:
+          print(f"{bcolors.WARNING}Username Length should be 3 or greater{bcolors.ENDC}\n")
+          continue 
+      s_code = database.checkforExistingUser(username)
+      if s_code["code"] == "400":
+        print(f"{bcolors.FAIL}Error! Username Already Taken! Try Again\n{bcolors.ENDC}")
+      else:
+        userNameNowVerified=True
+
     passwordNowVerified = False 
     input_now_verified = False
     while not passwordNowVerified:
-        password=input("Enter Password: ")
-        confirmPassword=input("Enter Password again: ")
+        print("Enter ",end="")
+        password=pwinput.pwinput()
+        if len(password)<8:
+          print(f"{bcolors.WARNING}Password Length should be 8 or greater{bcolors.ENDC}\n")
+          continue  
+        print("Confirm ",end="")
+        confirmPassword=pwinput.pwinput()
         if password==confirmPassword:
           passwordNowVerified=True
         else:
-            print("Password Dont Match Try Again\n")
+            print(f"{bcolors.WARNING}Password Dont Match Try Again{bcolors.ENDC}\n")
         
     input_now_verified = False
     while not input_now_verified:
