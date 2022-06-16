@@ -1,2 +1,5 @@
+Before Using the program install these dependencies by going into powershell and typing these commands
+
+
 pip install pwinput
 pip install tabulate

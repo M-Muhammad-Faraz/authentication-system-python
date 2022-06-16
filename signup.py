@@ -15,7 +15,6 @@ def verifyInput(inp):
     return False
 
 def signup():
-    OPTION = {"option1":"1","option2":"2"}
     system("cls")
     print("SIGNUP PAGE\n")
     userNameNowVerified = False
@@ -33,13 +32,12 @@ def signup():
     passwordNowVerified = False 
     input_now_verified = False
     while not passwordNowVerified:
-        print("Enter ",end="")
-        password=pwinput.pwinput()
+        
+        password=pwinput.pwinput(prompt="Enter Password: ")
         if len(password)<8:
           print(f"{bcolors.WARNING}Password Length should be 8 or greater{bcolors.ENDC}\n")
           continue  
-        print("Confirm ",end="")
-        confirmPassword=pwinput.pwinput()
+        confirmPassword=pwinput.pwinput(prompt="Confirm Password: ")
         if password==confirmPassword:
           passwordNowVerified=True
         else:
@@ -97,21 +95,15 @@ def signup():
 
       bloodgroup = input("Enter You bloodgroup : ")
 
-      if re.match("(A|B|AB|O)[+-]",bloodgroup):
+      if re.match("(A|B|AB|O)[+|-]",bloodgroup):
         input_now_verified=True
       else:
-        input(f"{bcolors.WARNING}Incorrect Bloodgroup, Please try again...{bcolors.ENDC}\n")
+        input(f"{bcolors.WARNING}Incorrect Bloodgroup, Please Enter to try again...{bcolors.ENDC}\n")
 
     newUser= user(username,password,{"heartAttack":heart_attack,"tumor":tumor,"cancer":cancer,"covid":covid,"tb":tb,"bloodGroup":bloodgroup})
-    status=database.addANewUser(newUser)
-    if status["code"] == "400":
-      choice = input(f"{bcolors.FAIL}Error! Username Already Taken!{bcolors.ENDC}\nPress 1: Try again!\nPress 2: Go Back\n")
-      if choice == OPTION["option1"]:
-        signup()
-      else:
-        return
-    else:
-      input(f"{bcolors.OKGREEN}Account Created!{bcolors.ENDC}\nPress any key to continue..")
+    
+    database.addANewUser(newUser)
+    input(f"{bcolors.OKGREEN}Account Created!{bcolors.ENDC}\nPress Enter key to continue..")
 
 
 

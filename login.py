@@ -6,8 +6,8 @@ def login():
     system("cls")
     print("Login Page")
     uname=input("Enter Username: ")
-    print("Enter ",end="")
-    passw=pwinput.pwinput()
+    
+    passw=pwinput.pwinput(prompt="Enter Password: ")
     user=database.getAUser(uname,passw)
 
     if user["code"]=="200":
@@ -17,7 +17,6 @@ def login():
     else:
         err = user["error"]
         input(f"{bcolors.FAIL}{err}{bcolors.ENDC}\nPress Any Key to Continue")
-        login()
         
                 
     

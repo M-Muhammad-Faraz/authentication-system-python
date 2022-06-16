@@ -1,3 +1,4 @@
+import sys
 from user import user
 from cypher import encrption,decryption
 class databaseModel:
@@ -5,9 +6,14 @@ class databaseModel:
         self.users = []
         f = open("users.txt",encoding="utf-8")
         for line in f:
-            obj =eval(decryption(line))
-            newUser = user(obj["username"],obj["password"],obj["info"],obj["encryption_pass"])
-            self.users.append(newUser)
+            try:
+                obj =eval(decryption(line))
+                newUser = user(obj["username"],obj["password"],obj["info"])
+                self.users.append(newUser)
+            except:
+                raise Exception('Error: '+sys.exc_info[0]) from None
+            finally:
+                continue
         f.close()
         self.currentUser=-1
 
@@ -42,12 +48,6 @@ class databaseModel:
                 else:
                     return{"code":"400","error":"Incorrect Password"}
         return {"code":"404","error":"User Not Found"}
-    
-    def getCurrentUser(self):
-        return self.currentUser    
-
-    def removeAUser(self,user):
-        self.users.popitem(user)
 
 database = databaseModel()
 

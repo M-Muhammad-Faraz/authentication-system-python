@@ -5,7 +5,6 @@ from time import sleep
 from login import login
 from signup import signup
 
-
 PROGRAM_END = False
 option = {
     "login":"1",
@@ -36,6 +35,7 @@ def home_page():
         input("Wrong Option Selected...\nPress Any Key To Retry..\n")
         system("cls")    
 
+# database.__init__()
 while not PROGRAM_END:
     home_page()
     
