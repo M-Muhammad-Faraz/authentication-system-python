@@ -13,6 +13,7 @@ class databaseModel:
             except:
                 raise Exception('Error: '+sys.exc_info[0]) from None
             finally:
+                # pass
                 continue
         f.close()
         self.currentUser=-1

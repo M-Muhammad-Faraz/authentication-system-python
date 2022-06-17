@@ -10,6 +10,7 @@ class user:
         self.info=info
 
     def dumpInfo(self):
+        
         return {"username":self.username,"password":self.password,"info":self.info}
 
     def main_menu(self):

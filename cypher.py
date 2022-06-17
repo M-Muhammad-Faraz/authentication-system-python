@@ -5,6 +5,7 @@ def encrption(data):
      dr=ord(cr)
      cr = chr(dr+13)
      tmp+=cr
+
  return tmp;
 
 def decryption(data):
@@ -14,4 +15,6 @@ def decryption(data):
      dr = ord(cr)
      cr = chr(dr-13)
      tmp+=cr
- return tmp;
+ tmp+="}"
+
+ return tmp

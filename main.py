@@ -35,7 +35,6 @@ def home_page():
         input("Wrong Option Selected...\nPress Any Key To Retry..\n")
         system("cls")    
 
-# database.__init__()
 while not PROGRAM_END:
     home_page()
     
